@@ -5,7 +5,7 @@
 ;; Author: Ian Eure <public@lowbar.fyi>
 ;; URL: https://github.com/ieure/exwm-mff
 ;; Version: 1.2.0
-;; Package-Requires: ((emacs "25"))
+;; Package-Requires: ((emacs "25.1"))
 ;; Keywords: unix
 
 ;; This program is free software; you can redistribute it and/or modify
