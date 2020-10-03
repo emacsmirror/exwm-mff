@@ -91,7 +91,8 @@
 (defun exwm-mff--contains-pointer? (window)
   "Return non-NIL when the mouse pointer is within FRAME and WINDOW."
   (cl-destructuring-bind ((mouse-x . mouse-y) (left top right bottom))
-      (list (mouse-absolute-pixel-position) (window-absolute-pixel-edges window))
+      (list (mouse-absolute-pixel-position)
+            (window-absolute-pixel-edges window))
     (and (<= left mouse-x right)
          (<= top mouse-y bottom))))
 
@@ -99,7 +100,8 @@
   "Log debug message STRING, using OBJECTS to format it."
   (let ((debug-level (or exwm-mff--debug 0)))
     (when (> debug-level 0)
-      (let ((str (apply #'format (concat "[%s] " string) (cons (current-time-string) objects))))
+      (let ((str (apply #'format (concat "[%s] " string)
+                        (cons (current-time-string) objects))))
         (when (>= debug-level 1)
           (with-current-buffer (get-buffer-create exwm-mff--debug-buffer)
             (goto-char (point-max))
@@ -122,7 +124,8 @@
 
 (defun exwm-mff-warp-to (frame window)
   "Place the pointer in the center of WINDOW in FRAME."
-  (apply #' set-mouse-pixel-position frame (exwm-mff--window-center frame window)))
+  (apply #'set-mouse-pixel-position frame
+         (exwm-mff--window-center frame window)))
 
 ;;;###autoload
 (defun exwm-mff-warp-to-selected ()
@@ -133,8 +136,7 @@
 
 (defun exwm-mff--explain (selected-window same-window? contains-pointer? mini? ignored?)
   "Use SELECTED-WINDOW, SAME-WINDOW?, CONTAINS-POINTER?, MINI?
-and IGNORED? to return an explanation of focusing
-behavior."
+and IGNORED? to return an explanation of focusing behavior."
   (cond
    (same-window? "selected window hasn't changed")
    (contains-pointer? "already contains pointer")
