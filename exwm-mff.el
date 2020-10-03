@@ -65,8 +65,6 @@
 ;;; Code:
 
 (require 'subr-x)
-(require 'exwm)
-(require 'xelb)
 
 (defcustom exwm-mff-ignore-if nil
   "List of predicate functions for windows to ignore.  Predicates accept one argument, WINDOW, and return non-NIL if automatic pointer warping should be suppressed."
