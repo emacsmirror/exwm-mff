@@ -86,9 +86,9 @@
   "The last selected window.")
 
 (defun exwm-mff--guard ()
-  "Raise an error unless this is a graphical session."
-  (unless (display-mouse-p)
-    (error "EXWM-MFF-MODE doesn't work without mouse support")))
+  "Raise an error unless this is a graphic session with mouse support."
+  (unless (and (display-graphic-p) (display-mouse-p))
+    (error "EXWM-MFF-MODE doesn't work on non-graphic or non-mouse sessions")))
 
 (defun exwm-mff--contains-pointer? (window)
   "Return non-NIL when the mouse pointer is within FRAME and WINDOW."
