@@ -117,10 +117,9 @@
 
 (defun exwm-mff--window-center (frame window)
   "Return a list of (x y) coordinates of the center of WINDOW in FRAME."
-  (pcase (window-pixel-edges window)
-    (`(,left ,top ,right ,bottom)
-     (list (+ left (/ (- right left) 2))
-           (+ top (/ (- bottom top) 2))))))
+  (cl-destructuring-bind (left top right bottom) (window-pixel-edges window)
+    (list (+ left (/ (- right left) 2))
+          (+ top (/ (- bottom top) 2)))))
 
 (defun exwm-mff-warp-to (frame window)
   "Place the pointer in the center of WINDOW in FRAME."
