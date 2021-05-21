@@ -1,6 +1,6 @@
 ;;; exwm-mff.el --- Mouse Follows Focus           -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2019, 2020  Ian Eure
+;; Copyright (C) 2019, 2020, 2021  Ian Eure
 
 ;; Author: Ian Eure <public@lowbar.fyi>
 ;; URL: https://github.com/ieure/exwm-mff
@@ -65,6 +65,7 @@
 ;;; Code:
 
 (require 'subr-x)
+(require 'cl-macs)
 
 (defcustom exwm-mff-ignore-if nil
   "List of predicate functions for windows to ignore.  Predicates accept one argument, WINDOW, and return non-NIL if automatic pointer warping should be suppressed."
