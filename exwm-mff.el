@@ -68,7 +68,10 @@
 (require 'cl-macs)
 
 (defcustom exwm-mff-ignore-if nil
-  "List of predicate functions for windows to ignore.  Predicates accept one argument, WINDOW, and return non-NIL if automatic pointer warping should be suppressed."
+  "List of predicate functions for windows to ignore.
+
+Predicates accept one argument, WINDOW, and return non-NIL if
+automatic pointer warping should be suppressed."
   :type 'hook
   :group 'exwm-mff)
 
@@ -116,7 +119,7 @@
   (setq exwm-mff--debug 1)
   (pop-to-buffer (get-buffer-create exwm-mff--debug-buffer)))
 
-(defun exwm-mff--window-center (frame window)
+(defun exwm-mff--window-center (window)
   "Return a list of (x y) coordinates of the center of WINDOW in FRAME."
   (cl-destructuring-bind (left top right bottom) (window-pixel-edges window)
     (list (+ left (/ (- right left) 2))
@@ -125,7 +128,7 @@
 (defun exwm-mff-warp-to (frame window)
   "Place the pointer in the center of WINDOW in FRAME."
   (apply #'set-mouse-pixel-position frame
-         (exwm-mff--window-center frame window)))
+         (exwm-mff--window-center window)))
 
 ;;;###autoload
 (defun exwm-mff-warp-to-selected ()
@@ -168,11 +171,16 @@ nil, and if it's not already in it."
            "warp-> %s::%s (%s)" sf sw (exwm-mff--explain sw nil contains-pointer? mini? ignore?))
           (exwm-mff-warp-to sf (setq exwm-mff--last-window sw)))))))
 
+(defgroup exwm-mff nil
+  "Mouse-Follows-Focus mode for EXWM."
+  :group 'exwm)
+
 ;;;###autoload
 (define-minor-mode exwm-mff-mode
   "Mouse follows focus mode for EXWM."
   :global t
   :require 'exwm-mff
+  :group 'exwm-mff
   (exwm-mff--guard)
   (if exwm-mff-mode
       (advice-add 'select-window :after #'exwm-mff-hook)
